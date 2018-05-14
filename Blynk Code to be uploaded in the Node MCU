@@ -1,0 +1,43 @@
+
+#include <ESP8266_Lib.h> //This library is used to connect ESP8266 module to Wi-Fi network to start sending and receiving data.
+
+#include <BlynkSimpleShieldEsp8266.h> //To connect the Blynk App with the ESP8266 module.
+
+// You should get Auth Token in the Blynk App. This authentication token creates a bridge to map the input and output. 
+
+char auth[] = "7607e3d6f037481c8142ca8830860515";
+
+// Your WiFi credentials.
+// Set password to "" for open networks.
+char ssid[] = "Redmi";
+char pass[] = "zxcvbnm1234";
+
+
+
+// Your ESP8266 baud rate:
+#define ESP8266_BAUD 115200
+
+ESP8266 wifi(&EspSerial);
+
+void setup()
+{
+  // Debug console
+  Serial.begin(9600);
+
+  // Set ESP8266 baud rate
+  EspSerial.begin(ESP8266_BAUD);
+  delay(10);
+
+  Blynk.begin(auth, wifi, ssid, pass);
+  // You can also specify server:
+  //Blynk.begin(auth, wifi, ssid, pass, "blynk-cloud.com", 8442);
+  //Blynk.begin(auth, wifi, ssid, pass, IPAddress(192,168,1,100), 8442);
+}
+
+void loop()
+{
+  Blynk.run();
+  // You can inject your own code or combine it with other sketches.
+  // Check other examples on how to communicate with Blynk. Remember
+  // to avoid delay() function!
+}
